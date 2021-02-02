@@ -26,12 +26,21 @@ def extract_hours(activity):
 courses = {}
 with open('task6.txt', 'r', encoding='utf-8') as fp:
     for line in fp:
-        course_name, *activities = line.split()
-        course_name = course_name.replace(':', '')
+        course_name, activities = line.split(':', maxsplit=1)
         course_hours = 0
-        for activity in activities:
+        for activity in activities.split():
             course_hours += extract_hours(activity)
         courses[course_name] = course_hours
 
 for course_name, course_hours in courses.items():
     print(f'{course_name}: {course_hours}')
+
+
+# Альтернативный способ
+import re
+hours_re = re.compile('^(\d+).*$')
+def extract_hours2(activity):
+    if match := hours_re.match(activity):
+        return int(match.group(1))
+    else:
+        return 0
