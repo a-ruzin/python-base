@@ -1,22 +1,14 @@
 
 class A:
-    def __init__(self, a):
-        self.a = a
+    def __init__(self):
+        pass
 
-    def __str__(self):
-        return f'!{self.a}!'
-
-    def __add__(self, other):
-        if hasattr(other, 'a'):
-            return A(self.a + other.a)
+    def __setattr__(self, key, value):
+        if key == 'dddd':
+            self.__dict__[key] = str(value) + 'hoho'
         else:
-            return A(self.a + other)
+            self.__dict__[key] = value
 
-x = A(3)
-y = A(15)
-print(x, y)
-
-z = x + y
-v = x + 'asdf'
-
-print(z, v)
+x = A()
+x.dddd = 333
+print(x.dddd)
