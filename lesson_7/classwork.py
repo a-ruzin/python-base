@@ -1,46 +1,29 @@
 
-# class MyException(Exception):
-#     pass
-#
-#
-# def f():
-#     raise MyException('Здесь произошло страшное')
-#
-# try:
-#     a = f()
-# except Exception as e:
-#     print(e)
-#
-#
-#
-#
-
-class TourError(Exception):
-    pass
+def prepend_dashes(func):
+    def xxx(*args, **kwargs):
+        print('----')
+        result = func(*args, **kwargs)
+        print('====')
+        return result
+    return xxx
 
 
-class CarBrokenError(TourError):
-    pass
-
-
-class SightseenIsNotAvailableError(TourError):
-    pass
-
-
-
+@prepend_dashes
 def move_to(place):
-    raise CarBrokenError()
     print('move_to', place)
 
 
+@prepend_dashes
 def observe(sightseen):
     print('observe', sightseen)
 
 
+@prepend_dashes
 def eat(meal):
     print('eat', meal)
 
 
+@prepend_dashes
 def rest():
     print('rest')
 
@@ -65,10 +48,4 @@ activities = [
 ]
 
 for activity in activities:
-    try:
-        activity()
-    except TourError as e:
-        print('Сломалась машина, Тогда поедем на поезде')
-    except Exception as e:
-        print(e)
-        exit(1)
+    activity()
