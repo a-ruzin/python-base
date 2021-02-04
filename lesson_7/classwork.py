@@ -1,57 +1,74 @@
 
-class MyException(Exception):
+# class MyException(Exception):
+#     pass
+#
+#
+# def f():
+#     raise MyException('Здесь произошло страшное')
+#
+# try:
+#     a = f()
+# except Exception as e:
+#     print(e)
+#
+#
+#
+#
+
+class TourError(Exception):
     pass
 
 
-def f():
-    raise MyException('Здесь произошло страшное')
-
-try:
-    a = f()
-except Exception as e:
-    print(e)
+class CarBrokenError(TourError):
+    pass
 
 
-
-
-
-
-
-
-
-
-
-
+class SightseenIsNotAvailableError(TourError):
+    pass
 
 
 
 def move_to(place):
-    pass
+    raise CarBrokenError()
+    print('move_to', place)
 
 
 def observe(sightseen):
-    pass
+    print('observe', sightseen)
 
 
 def eat(meal):
-    pass
+    print('eat', meal)
 
 
 def rest():
-    pass
+    print('rest')
 
+
+from functools import partial
 
 activities = [
-    move_to('london'),
-    observe('Thamse'),
-    eat('tea'),
-    rest(),
-    move_to('Paris'),
-    observe('Eiffel'),
-    eat('croasson'),
-    rest(),
-    move_to('home'),
-    eat('whatever you like'),
-    observe('tv'),
-    rest()
+    partial(move_to, 'london'),
+    partial(observe, 'Thamse'),
+    partial(eat, 'tea'),
+    partial(rest),
+    partial(move_to, 'Paris'),
+    partial(observe, 'Eiffel'),
+    partial(eat, 'croasson'),
+    partial(rest ),
+    partial(move_to, 'home'),
+    partial(eat, 'whatever you like'),
+    partial(observe, 'tv'),
+    partial(rest),
+    partial(observe, 'tv'),
+    partial(rest)
 ]
+
+for activity in activities:
+    try:
+        activity()
+    except TourError as e:
+        print('Сломалась машина, Тогда поедем на поезде')
+    except Exception as e:
+        print(e)
+        exit(1)
