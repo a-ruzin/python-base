@@ -1,14 +1,11 @@
 
 class A:
-    def __init__(self):
-        pass
+    def __init__(self, xxx):
+        self.xxx = xxx
 
-    def __setattr__(self, key, value):
-        if key == 'dddd':
-            self.__dict__[key] = str(value) + 'hoho'
-        else:
-            self.__dict__[key] = value
+    def __getitem__(self, index):
+        return self.xxx[-index]
 
-x = A()
-x.dddd = 333
-print(x.dddd)
+
+x = A('asdfasdf')
+print(x[2])
