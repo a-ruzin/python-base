@@ -17,7 +17,7 @@ class A:
         self.xxx = xxx
 
     def __iter__(self):
-        zzz = self.__dict__.keys()
+        zzz = list(self.__dict__.keys())
         return Iter(zzz)
 
 
