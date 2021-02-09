@@ -18,23 +18,28 @@ class Cloth(ABC):
     def get_material_size(self):
         pass
 
+    @property
+    def size(self):
+        return self.get_material_size()
+
 
 class Suit(Cloth):
     def __init__(self, w, h):
         self.w = w
         self.h = h
 
+
     def get_material_size(self):
         return self.w * self.h
 
 
 class Coat(Cloth):
-    def __init__(self, size, length):
-        self.size = size
+    def __init__(self, s, length):
+        self.s = s
         self.length = length
 
     def get_material_size(self):
-        return self.size * self.length * 2
+        return self.s * self.length * 2
 
 
 suit = Suit(10, 5)
@@ -42,4 +47,4 @@ coat = Coat(5, 3)
 
 clothes = [suit, coat]
 for cloth in clothes:
-    print(cloth.get_material_size())
+    print(cloth.size)
