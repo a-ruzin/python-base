@@ -28,7 +28,6 @@ class Suit(Cloth):
         self.w = w
         self.h = h
 
-
     def get_material_size(self):
         return self.w * self.h
 
