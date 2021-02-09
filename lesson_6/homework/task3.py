@@ -17,6 +17,8 @@ class Worker:
         self.income = {'wage': wage, 'bonus': bonus}
 
 
+# Пример плохого ООП - класс Position не должен наследоваться от Worker
+
 class Position(Worker):
     def get_full_name(self):
         return f'{self.name} {self.surname}'
