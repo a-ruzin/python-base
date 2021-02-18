@@ -38,8 +38,8 @@ keywords = """
 
 +   try
 +   except
-+   as
 +   finally
++   as
 
 +   def
 +   return
@@ -50,29 +50,29 @@ keywords = """
 -   assert
 -   async
 -   await
-?   class
-!   del
-!   from
-!   import
-?   raise
-?   with
-!   yield
++   class
++   del
++   from
++   import
+!   raise
++   with
++   yield
 """
 
 
 keywords_by_category = {}
 keywords_list = keywords.split('\n')
-keywords_count = 0
+count_words = 0
 for kw in keywords_list:
     if kw:
-        keywords_count += 1
         letter = kw[0]
         if letter in keywords_by_category:
             keywords_by_category[letter].append(kw)
         else:
             keywords_by_category[letter] = [kw]
+        count_words += 1
 
 for letter, ks in keywords_by_category.items():
-    print(f"{letter}: {len(ks)}, {100*len(ks)/keywords_count:.2f}%")
+    print(f"{letter}: {len(ks)}, {100*len(ks)/count_words:.2f}%")
     for k in ks:
         print('  ', k)
